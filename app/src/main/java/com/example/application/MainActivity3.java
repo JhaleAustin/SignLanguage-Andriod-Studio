@@ -45,7 +45,11 @@ public class MainActivity3 extends AppCompatActivity {
         btnSpeak = findViewById(R.id.btnSpeak);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView.setLayoutManager(layoutManager);
+
+
         MyAdapter adapter = new MyAdapter(getApplicationContext(), new ArrayList<>());
         recyclerView.setAdapter(adapter);
 

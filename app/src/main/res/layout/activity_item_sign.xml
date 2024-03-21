@@ -26,7 +26,8 @@
         android:layout_height="wrap_content"
         android:text="Sign Name"
         android:gravity="center"
-        android:paddingTop="8dp"/>
+        android:paddingTop="8dp"
+        tools:ignore="MissingConstraints" />
 
 
 

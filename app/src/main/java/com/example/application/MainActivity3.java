@@ -1,11 +1,13 @@
 package com.example.application;
 
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +27,7 @@ public class MainActivity3 extends AppCompatActivity {
     private SpeechRecognizer speechRecognizer;
     private ImageButton btnSpeak;
     private TextView tvText;
+    private  Button btnClear;
 
     private final int[] imgLetter = {
             R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d,R.drawable.e, R.drawable.f,
@@ -36,6 +39,7 @@ public class MainActivity3 extends AppCompatActivity {
             R.drawable.z,
     };
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +64,20 @@ public class MainActivity3 extends AppCompatActivity {
                 startSpeechRecognition();
             }
         });
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Clear the text view
+                tvText.setText("");
+
+                // Clear the recycler view
+                RecyclerView recyclerView = findViewById(R.id.recyclerView);
+                MyAdapter adapter = new MyAdapter(getApplicationContext(), new ArrayList<>());
+                recyclerView.setAdapter(adapter);
+            }
+        });
+
     }
 
     private void startSpeechRecognition() {

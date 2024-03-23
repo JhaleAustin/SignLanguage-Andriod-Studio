@@ -2,39 +2,48 @@ package com.example.application;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    private Context context;
+    private List<item> items;
 
-    Context context;
-    List<item> items;
-
-
-    public MyAdapter(Context context,List<item> items)
-    {
-        this.context=context;
-        this.items= items;
+    public MyAdapter(Context context, List<item> items) {
+        this.context = context;
+        this.items = items;
     }
+
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_view,parent,false));
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_view, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-holder.letterView.setText(items.get(position).getLetter());
-        holder.imageView.setImageResource(items.get(position).getImg());
-
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        item item = items.get(position);
+        holder.imageViewLetter.setImageResource(item.getImg());
     }
 
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imageViewLetter;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imageViewLetter = itemView.findViewById(R.id.imageViewLetter);
+        }
     }
 }

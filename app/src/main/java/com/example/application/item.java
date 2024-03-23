@@ -25,4 +25,5 @@ public class item {
     public void setImg(int image) {
         this.image = image;
     }
+
 }

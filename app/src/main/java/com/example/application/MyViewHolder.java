@@ -15,7 +15,7 @@ public class MyViewHolder extends ViewHolder {
     public MyViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        imageView = itemView.findViewById(R.id.imageView3);
-        letterView  = itemView.findViewById(R.id.textView4);
+        imageView = itemView.findViewById(R.id.imageViewLetter);
+//        letterView  = itemView.findViewById(R.id.textView4);
     }
 }

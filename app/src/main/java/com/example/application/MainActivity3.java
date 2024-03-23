@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,14 +50,14 @@ public class MainActivity3 extends AppCompatActivity {
         tvText = findViewById(R.id.tvText);
         btnSpeak = findViewById(R.id.btnSpeak);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        recyclerView.setLayoutManager(layoutManager);
+//        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        recyclerView.setLayoutManager(layoutManager);
 
 
         MyAdapter adapter = new MyAdapter(getApplicationContext(), new ArrayList<>());
-        recyclerView.setAdapter(adapter);
+//        recyclerView.setAdapter(adapter);
 
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
         btnSpeak.setOnClickListener(new View.OnClickListener() {
@@ -73,10 +75,10 @@ public class MainActivity3 extends AppCompatActivity {
                 // Clear the text view
                 tvText.setText("");
 
-                // Clear the recycler view
-                RecyclerView recyclerView = findViewById(R.id.recyclerView);
+//                // Clear the recycler view
+//                RecyclerView recyclerView = findViewById(R.id.recyclerView);
                 MyAdapter adapter = new MyAdapter(getApplicationContext(), new ArrayList<>());
-                recyclerView.setAdapter(adapter);
+//                recyclerView.setAdapter(adapter);
             }
         });
 
@@ -106,21 +108,42 @@ public class MainActivity3 extends AppCompatActivity {
                 updateRecyclerView(getText);
             }
         }
+    }private void updateRecyclerView(String text) {
+        String[] words = text.split(" ");
+
+        LinearLayout recyclerViewContainer = findViewById(R.id.recyclerViewContainer);
+        recyclerViewContainer.removeAllViews(); // Clear any existing RecyclerViews
+
+        for (String word : words) {
+            RecyclerView recyclerView = new RecyclerView(this);
+            recyclerView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            recyclerView.setPadding(0, 5, 0, 5);
+            recyclerViewContainer.addView(recyclerView);
+
+            List<item> items = getItemsForWord(word);
+            MyAdapter adapter = new MyAdapter(getApplicationContext(), items);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        }
     }
 
-    private void updateRecyclerView(String text) {
-        List<item> items = new ArrayList<>();
-
-        for (int i = 0; i < text.length(); i++) {
-            char letter = Character.toUpperCase(text.charAt(i));
+    private List<item> getItemsForWord(String word) {
+        word = word.toUpperCase();
+        List<item> wordItems = new ArrayList<>();
+        for (int i = 0; i < word.length(); i++) {
+            char letter = word.charAt(i);
             int index = letter - 'A';
             if (index >= 0 && index < imgLetter.length) {
-                items.add(new item(String.valueOf(letter), imgLetter[index]));
+                wordItems.add(new item(String.valueOf(letter), imgLetter[index]));
             }
         }
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        MyAdapter adapter = new MyAdapter(getApplicationContext(), items);
-        recyclerView.setAdapter(adapter);
+        return wordItems;
     }
+
+
+
+
+
+
+
 }

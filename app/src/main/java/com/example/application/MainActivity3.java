@@ -25,6 +25,7 @@ import java.util.List;
 public class MainActivity3 extends AppCompatActivity {
 
     private static final int RESULT_SPEECH = 1;
+    private LinearLayout recyclerViewContainer; // Declared at class level
 
     private SpeechRecognizer speechRecognizer;
     private ImageButton btnSpeak;
@@ -55,7 +56,6 @@ public class MainActivity3 extends AppCompatActivity {
 //        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 //        recyclerView.setLayoutManager(layoutManager);
 
-
         MyAdapter adapter = new MyAdapter(getApplicationContext(), new ArrayList<>());
 //        recyclerView.setAdapter(adapter);
 
@@ -67,6 +67,10 @@ public class MainActivity3 extends AppCompatActivity {
             }
         });
 
+
+        recyclerViewContainer = findViewById(R.id.recyclerViewContainer);
+        recyclerViewContainer.removeAllViews(); // Clear any existing RecyclerViews
+
         btnClear = findViewById(R.id.btnClear);
 
         btnClear.setOnClickListener(new View.OnClickListener() {
@@ -74,11 +78,8 @@ public class MainActivity3 extends AppCompatActivity {
             public void onClick(View v) {
                 // Clear the text view
                 tvText.setText("");
-
-//                // Clear the recycler view
-//                RecyclerView recyclerView = findViewById(R.id.recyclerView);
-                MyAdapter adapter = new MyAdapter(getApplicationContext(), new ArrayList<>());
-//                recyclerView.setAdapter(adapter);
+                // Clear the RecyclerView container
+                recyclerViewContainer.removeAllViews();
             }
         });
 
@@ -105,15 +106,15 @@ public class MainActivity3 extends AppCompatActivity {
             ArrayList<String> text = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             if (text != null && !text.isEmpty()) {
                 String getText = text.get(0);
+                tvText.setText(getText);
                 updateRecyclerView(getText);
+
             }
         }
     }private void updateRecyclerView(String text) {
         String[] words = text.split(" ");
 
-        LinearLayout recyclerViewContainer = findViewById(R.id.recyclerViewContainer);
-        recyclerViewContainer.removeAllViews(); // Clear any existing RecyclerViews
-
+       
         for (String word : words) {
             RecyclerView recyclerView = new RecyclerView(this);
             recyclerView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -135,6 +136,7 @@ public class MainActivity3 extends AppCompatActivity {
             int index = letter - 'A';
             if (index >= 0 && index < imgLetter.length) {
                 wordItems.add(new item(String.valueOf(letter), imgLetter[index]));
+
             }
         }
         return wordItems;

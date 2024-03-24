@@ -45,5 +45,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             super(itemView);
             imageViewLetter = itemView.findViewById(R.id.imageViewLetter);
         }
+
     }
+
+
+    public void clearData() {
+        items.clear(); // Assuming itemList is the list holding your data
+        notifyDataSetChanged(); // Notify the RecyclerView about the changes
+    }
+
+
+
+
 }

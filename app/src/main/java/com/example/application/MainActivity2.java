@@ -3,6 +3,7 @@ package com.example.application;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ public class MainActivity2 extends AppCompatActivity {
     private TextToSpeech textToSpeech;
     private ImageButton a, b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,delete,space ;
     private String text,word="";
+    private Button btnClear;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,16 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
+
+
+        btnClear =  findViewById(R.id.btnClear);
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textET.setText("");
+
+            }
+        });
 
 
 

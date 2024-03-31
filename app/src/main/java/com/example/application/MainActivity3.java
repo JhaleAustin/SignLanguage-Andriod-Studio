@@ -78,8 +78,18 @@ public class MainActivity3 extends AppCompatActivity {
             public void onClick(View v) {
                 // Clear the text view
                 tvText.setText("");
+
                 // Clear the RecyclerView container
                 recyclerViewContainer.removeAllViews();
+
+                // Clear the RecyclerView adapter data
+                for (int i = 0; i < recyclerViewContainer.getChildCount(); i++) {
+                    View childView = recyclerViewContainer.getChildAt(i);
+                    if (childView instanceof RecyclerView) {
+                        RecyclerView recyclerView = (RecyclerView) childView;
+                        recyclerView.setAdapter(null);
+                    }
+                }
             }
         });
 

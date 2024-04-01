@@ -56,7 +56,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textET.setText("");
-
+                word="";
             }
         });
 

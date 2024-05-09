@@ -1,6 +1,11 @@
 package com.example.application;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +25,9 @@ import java.util.List;
 public class MainActivity5 extends AppCompatActivity {
     RecyclerView recyclerView;
     Adapter adapter;
+    EditText searchField;
+    Button searchButton;
+    List<DataModel> allData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +35,54 @@ public class MainActivity5 extends AppCompatActivity {
         setContentView(R.layout.activity_main5);
 
         recyclerView = findViewById(R.id.ListOfData);
+        searchField = findViewById(R.id.searchField);
+        searchButton = findViewById(R.id.searchButton);
+
         adapter = new Adapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        List<DataModel> data = readExcelFileFromRaw(); // Modify this line to get List<DataModel> instead of List<String>
-        adapter.setData(data);
+        allData = readExcelFileFromRaw();
+        adapter.setData(allData);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                performSearch();
+            }
+        });
+
+        searchField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // You can perform search while typing here if needed
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    private void performSearch() {
+        String keyword = searchField.getText().toString().trim();
+        if (!keyword.isEmpty()) {
+            List<DataModel> searchResults = new ArrayList<>();
+            for (DataModel data : allData) {
+                if (data.getText().toLowerCase().contains(keyword.toLowerCase())) {
+                    searchResults.add(data);
+                }
+            }
+            adapter.setData(searchResults);
+        } else {
+            adapter.setData(allData);
+        }
     }
 
     private List<DataModel> readExcelFileFromRaw() {

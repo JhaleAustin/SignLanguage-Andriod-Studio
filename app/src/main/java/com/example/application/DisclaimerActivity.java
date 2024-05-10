@@ -23,15 +23,13 @@ public class DisclaimerActivity extends Activity {
         disclaimerTextView = findViewById(R.id.disclaimerTextView);
         acceptCheckBox = findViewById(R.id.acceptCheckBox);
         proceedButton = findViewById(R.id.proceedButton);
-        disclaimerTextView.setText( "Disclaimer\n" +
-                "* *Use at your own risk:*  This application (Two Way Communication for Mute People) is provided \"as is\" and without any warranty, express or implied. The developers disclaim all warranties, including but not limited to, warranties of merchantability, fitness for a particular purpose, and non-infringement. The developers assume no liability for any damages arising out of the use of this application.\n" +
-                "* *Limitation of Liability:*  The developers of this application shall not be liable for any direct, indirect, incidental, consequential, or punitive damages arising out of or in connection with the use of this application, including, but not limited to, damages for loss of profits, data, or business interruption.\n" +
+        disclaimerTextView.setText( "This two-way communication app is specifically designed for individuals who are mute but able to read in English language. Also for a normal person who want to communication with mute or deaf people. It is important to note that this application is intended to facilitate communication between users who are able and unable to speak verbally.\n" +
                 "\n" +
-                "* *Third-Party Content:* This application may contain links to third-party websites or services that are not owned or controlled by the developers. The developers are not responsible for the content or accuracy of any third-party websites or services. \n" +
+                "Users of this app should be aware that while it provides a platform for written communication, it may not be suitable for all individuals with communication challenges. It is recommended that users exercise caution and discretion when sharing personal information or engaging in conversations through this app.\n" +
                 "\n" +
-                "* *Data Usage:* This application may collect and use certain user data. Please refer to our Privacy Policy for more information on how we collect and use your data. \n" +
-                " ([Link to your Privacy Policy here])\n" +
-                "* *Changes to this Disclaimer:* The developers reserve the right to update this disclaimer at any time. You are advised to periodically revie this disclaimer for any changes.");
+                "Additionally, it is important to note that this app is not a replacement for professional medical advice or treatment. Users are strongly encouraged to seek guidance from healthcare professionals or speech therapists for personalized communication solutions and support.\n" +
+                "\n" +
+                "By using this two-way communication app, users acknowledge and accept the terms and conditions outlined in this disclaimer. The developers of this app are not liable for any misuse or misinterpretation of information exchanged through the platform.\n");
                 proceedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

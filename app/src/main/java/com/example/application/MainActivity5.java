@@ -28,6 +28,7 @@ public class MainActivity5 extends AppCompatActivity {
     EditText searchField;
     Button searchButton;
     List<DataModel> allData;
+    Button reloadButton; // Add reload button
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class MainActivity5 extends AppCompatActivity {
         recyclerView = findViewById(R.id.ListOfData);
         searchField = findViewById(R.id.searchField);
         searchButton = findViewById(R.id.searchButton);
+        reloadButton = findViewById(R.id.reloadButton); // Initialize reload button
 
         adapter = new Adapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -44,6 +46,15 @@ public class MainActivity5 extends AppCompatActivity {
 
         allData = readExcelFileFromRaw();
         adapter.setData(allData);
+
+        reloadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                allData = readExcelFileFromRaw();
+                adapter.setData(allData);
+            }
+        });
+
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override

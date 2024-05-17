@@ -1,5 +1,6 @@
 package com.example.application;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -50,9 +51,14 @@ public class MainActivity5 extends AppCompatActivity {
         reloadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                allData = readExcelFileFromRaw();
-                adapter.setData(allData);
+                Intent intents = new Intent(MainActivity5.this, MainActivity.class);
+                startActivity(intents);
             }
+        //  @Override
+//            public void onClick(View v) {
+//                allData = readExcelFileFromRaw();
+//                adapter.setData(allData);
+//            }
         });
 
 

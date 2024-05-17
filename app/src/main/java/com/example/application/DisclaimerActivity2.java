@@ -36,9 +36,21 @@ public class DisclaimerActivity2 extends Activity {
             @Override
             public void onClick(View v) {
                 if (acceptCheckBox.isChecked()) {
+                    Intent intents = getIntent();
+                    int mainGet = intents.getIntExtra("mainGet", 0); // Default value is 0 if not found
                     // User accepted disclaimer, proceed to MainActivity
-                    Intent intent = new Intent(DisclaimerActivity2.this, MainActivity2.class);
-                    startActivity(intent);
+                   if(mainGet == 2){
+                       Intent intent = new Intent(DisclaimerActivity2.this, MainActivity2.class);
+                       startActivity(intent); }
+                   else   if(mainGet == 3){
+                       Intent intent = new Intent(DisclaimerActivity2.this, MainActivity3.class);
+                       startActivity(intent); }
+                   else   if(mainGet == 5){
+                       Intent intent = new Intent(DisclaimerActivity2.this, MainActivity5.class);
+                       startActivity(intent); }
+                   else   if(mainGet == 0){
+                       Intent intent = new Intent(DisclaimerActivity2.this, MainActivity.class);
+                       startActivity(intent); }
                     //      finish(); // Finish disclaimer activity
                 } else {
                     // Show a message that user needs to accept disclaimer
@@ -46,5 +58,11 @@ public class DisclaimerActivity2 extends Activity {
                 }
             }
         });
+
+
     }
+
+
+
+
 }
